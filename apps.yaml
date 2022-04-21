@@ -2,14 +2,13 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: oracle12c
-  namespace: openshift-gitops
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: oracle12c
   source:
     path: helm
-    repoURL: https://github.com/vfarcic/devops-toolkit.git
+    repoURL: https://github.com/Telemarking/oracle12c-gitops.git
     targetRevision: HEAD
   destination:
     namespace: oracle12c
@@ -18,3 +17,5 @@ spec:
     automated:
       selfHeal: true
       prune: true
+    syncOptions:
+      - CreateNamespace=true
